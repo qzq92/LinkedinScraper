@@ -10,34 +10,43 @@ from output_parsers import summary_parser, Summary
 API_Key = os.getenv('OPENAI_API_KEY')
 
 def get_summary_and_interesting_facts(name: str)-> Tuple[Summary, str, str, str]:
+    """Function which scrapes information from linkedin profiles.
 
-    # Get the linkedin url
+    Args:
+        name (str): Name of person.
+
+    Returns:
+        Tuple[Summary, str, str, str]: Includes a LLM summary of the person based on input person name of interest, the corresponding profile_pic_url for frontend display, the person's occupation, country
+    """
+    # Get the linkedin lookup url with agentic call and scrape the information using nubela api
     linkedin_url = linkedin_lookup_agent(name=name)
     linkedin_data = scrape_linkedin_profile(linkedin_profile_url=linkedin_url)
 
-     # Template for LLM
+     # Template for LLM to generate short summary and two interesting facts
     summary_template = """
         Given the Linkedin information {information} about a person from I want you to create:
         1. A short summary.
-        2. Two interesting facts about them
+        2. Three interesting facts about them
 
-        Use the information from Linkedin
+        Use the information provided from Linkedin
         \n {format_instructions}
     """
     if linkedin_data:
-        # Construct template and llm into chain
+        # Construct prompt template with summary template and defined input variable + the partial variable to indicate required formatting
         summary_prompt_template = PromptTemplate(
             input_variables=["information"],
             template=summary_template,
             partial_variables={"format_instructions": summary_parser.get_format_instructions()} # Format instruction for prompt templates into defined structured data. Since we have the value, declare as partial variable
         )
 
-        # LLM model with 0 creativity defined by temperature
+        # Defined LLM model using ChatOpenAI GPT3.5 with 0 creativity defined by temperature
         llm = ChatOpenAI(api_key=API_Key, temperature=0, model_name="gpt-3.5-turbo")
 
-        # LCEL structure: prompt template > llm > summary parser
+        # Chain the components via LCEL structure: prompt template > llm > summary parser and invoke with inputs to get summary
         chain = summary_prompt_template | llm | summary_parser
         res: Summary = chain.invoke(input ={"information": linkedin_data}) # input must match prompt template input variables
+
+        # Retrieve other linkedin artefacts provided from Proxycurl API
         profile_pic_url = linkedin_data.get("profile_pic_url")
         occupation = linkedin_data.get("occupation")
         country = linkedin_data.get("country")
@@ -53,5 +62,5 @@ def get_summary_and_interesting_facts(name: str)-> Tuple[Summary, str, str, str]
         
 if __name__ == "__main__":
     load_dotenv()
-    print("Ice Breaker Enter")
-    get_summary_and_interesting_facts(name="Anwar Ibrahim")
+    # Test with Donald Trump during debug
+    get_summary_and_interesting_facts(name="Donald Trump")
