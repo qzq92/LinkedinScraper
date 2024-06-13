@@ -7,7 +7,7 @@ __pycache__/
 *.so
 
 # API key
-openai_key.txt
+.env
 
 # Distribution / packaging
 .Python
