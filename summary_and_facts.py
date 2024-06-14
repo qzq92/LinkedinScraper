@@ -6,17 +6,17 @@ from dotenv import load_dotenv
 from third_parties.linkedin import scrape_linkedin_profile
 from agents.linkedin_lookup_agents import lookup as linkedin_lookup_agent
 from output_parsers import summary_parser, Summary
-# Update this to read from .env file if necessary
+
 API_Key = os.getenv('OPENAI_API_KEY')
 
-def get_summary_and_interesting_facts(name: str)-> Tuple[Summary, str, str, str]:
+def get_summary_and_interesting_facts(name: str)-> Tuple[Summary, str, str, str, str]:
     """Function which scrapes information from linkedin profiles.
 
     Args:
         name (str): Name of person.
 
     Returns:
-        Tuple[Summary, str, str, str]: Includes a LLM summary of the person based on input person name of interest, the corresponding profile_pic_url for frontend display, the person's occupation, country
+        Tuple[Summary, str, str, str]: Includes a LLM summary of the person based on input person name of interest, the corresponding profile_pic_url for frontend display, the person's full name, country and Linkedin URL.
     """
     # Get the linkedin lookup url with agentic call and scrape the information using nubela api
     linkedin_url = linkedin_lookup_agent(name=name)
@@ -24,7 +24,7 @@ def get_summary_and_interesting_facts(name: str)-> Tuple[Summary, str, str, str]
 
     # Template for LLM to generate short summary and two interesting facts
     summary_template = """
-        Given the Linkedin information {information} about a person from I want you to create:
+        Given the Linkedin information of a person as follows:\n\n {information} \n\n I want you to create:
         1. A short summary.
         2. Three interesting facts about them
 
@@ -48,22 +48,21 @@ def get_summary_and_interesting_facts(name: str)-> Tuple[Summary, str, str, str]
 
         # Retrieve other linkedin artefacts provided from Proxycurl API
         profile_pic_url = linkedin_data.get("profile_pic_url")
-        occupation = linkedin_data.get("occupation")
-        country = linkedin_data.get("country")
+        full_name = linkedin_data.get("full_name")
+        country_full_name = linkedin_data.get("country_full_name")
+        if not profile_pic_url:
+            profile_pic_url = "https://upload.wikimedia.org/wikipedia/commons/d/d1/Image_not_available.png"
+        
 
-        if occupation == "":
-            occupation = "Unknown"
-        if country == "":
-            country = "Unknown"
     # Case when invalid link is provided
     else:
         print("Unable to scrape linkedin data due to invalid link provided")
         res = None
         profile_pic_url = "https://upload.wikimedia.org/wikipedia/commons/d/d1/Image_not_available.png"
-        occupation = "Undefined"
-        country = "Undefined"
+        full_name = "Undefined"
+        country_full_name = "Undefined"
     
-    return res, profile_pic_url, occupation, country
+    return res, profile_pic_url, full_name, country_full_name, linkedin_url
         
 if __name__ == "__main__":
     load_dotenv()

@@ -12,7 +12,7 @@
                 <h1>Simple Linkedin Bio Search and Summary App</h1>
                 <input type="text" name="name" placeholder="Enter person name">
                 <button id="magic-button" type="submit" class="center">Search</button>
-                <p>Please re-enter the field again for subsequent searches or when there is no response.</p>
+                <p>Please re-enter the field again for subsequent searches or in the case when there is no response with the spinner below continuously spinning.</p>
             </form>
         </header>
         <div id="spinner" style="text-align: center; display: none">
@@ -20,11 +20,16 @@
         </div>
         <main id="result" style="display: none">
             <div style="text-align: center">
-                <img id="profile-pic" src="" alt="Profile Picture" style="width: 400px; max-width: 100%; height: auto; border-radius: 50%; margin-bottom: 20px;">
+                <h2>Profile picture</h2>
+                <img id="profile-pic" src="" alt="Profile picture" style="width: 300px; max-width: 100%; height: auto; border-radius: 50%; margin-bottom: 20px;">
             </div>
             <div>
-                <h2>Occupation</h2>
-                <p id="occupation"></p>
+                <h2>Name</h2>
+                <p id="name"></p>
+            </div>
+            <div>
+                <h2>URL</h2>
+                <p id="url"></p>
             </div>
             <div>
                 <h2>Country</h2>
@@ -56,12 +61,15 @@
                 fetch("/process", {method: "POST", body: formData})
                     .then(response => {
                         if (response.ok) return response.json();
+                        spinner.style.display = "none";
+                        result.style.display = "";
                         throw new Error("POST request failed");
                     })
                     .then(data => {
                         document.getElementById("profile-pic").src = data.picture_url;
-                        document.getElementById("occupation").textContent, data.occupation;
-                        document.getElementById("country").textContent, data.country;
+                        document.getElementById("url").textContent= data.url;
+                        document.getElementById("name").textContent= data.full_name;
+                        document.getElementById("country").textContent, data.country_full_name;
                         document.getElementById("summary").textContent = data.summary_and_facts.summary;
                         createHtmlList(document.getElementById("facts"), data.summary_and_facts.facts);
 

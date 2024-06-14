@@ -2,9 +2,11 @@
 
 This is a simple app developed as part of learning LLM development experience, where one could simply input in the frontend web app on a person of interest and retireve a likely Linkedin page with a short summary and three interesting facts included.
 
-**Disclaimer**: Accuracy and quickness of results are not guaranteed and immediate as this is just a simple exploratory development project. 
+**Disclaimer**: Accuracy and quickness of results are not guaranteed as this is just a simple exploratory development project. Do expect some 
 
 ## Sample frontend
+
+Using Barrack Obama as example
 ![Input page](images/frontend.png)
 
 ## API used
@@ -31,7 +33,7 @@ Please use Anaconda distribution to install the necessary libraries with the fol
 conda env create -f environment.yml
 ```
 
-Upon installation and environment exectuion, do run the following command
+Upon installation and environment exectuion, do run the following command to spin up the flask app, which is then accessible via http://localhost:5000 by default.
 
 ```
 python <Path to project repo>/app.py
