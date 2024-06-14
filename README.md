@@ -17,13 +17,14 @@ Please note that the following API requires the use of API key to work and are n
 - *Langchain's ChatOpenAi* to chat with OpenAI's GPT-3.5-Turbo model (https://api.python.langchain.com/en/latest/chat_models/langchain_openai.chat_models.base.ChatOpenAI.html).
 
 ## Environment file to edit
-Please update the *.env* file with the following parameters. PYTHONPATH is required to be filled to ensure successful folder imports in project.
+Please create an *.env* file with the following parameters. PYTHONPATH is required to be filled to ensure successful folder imports in project.
 
 ```
 OPENAI_API_KEY=<YOUR API KEY>
 PROXYCURL_API_KEY=<YOUR API KEY>
 TAVILY_API_KEY=<YOUR API KEY>
 PYTHONPATH=<Absolute path to the directory where this project is cloned>
+LANGCHAIN_API_KEY=<YOUR API KEY for which langsmith is used>
 ```
 
 ## Installation and execution
