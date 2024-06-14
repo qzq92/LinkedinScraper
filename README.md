@@ -39,8 +39,10 @@ Upon installation and environment exectuion, do run the following command to spi
 python <Path to project repo>/app.py
 ```
 
-## Programming languages involved
+## Programming languages/tools involved
 - Python
+- Flask
+- Langchain
 - HTML/CSS
 
 ## Acknowledgement and Credits
