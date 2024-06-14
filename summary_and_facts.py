@@ -26,7 +26,7 @@ def get_summary_and_interesting_facts(name: str)-> Tuple[Summary, str, str, str,
     summary_template = """
         Given the Linkedin information of a person as follows:\n\n {information} \n\n I want you to create:
         1. A short summary.
-        2. Three interesting facts about them
+        2. Three interesting facts about them.
 
         Use the information provided from Linkedin
         \n {format_instructions}

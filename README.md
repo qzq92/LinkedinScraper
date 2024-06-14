@@ -2,8 +2,7 @@
 
 This is a simple app developed as part of learning LLM development experience, where one could simply input in the frontend web app on a person of interest and retireve a likely Linkedin page with a short summary and three interesting facts included.
 
-**Disclaimer**: Accuracy and quickness of results are not guaranteed as this is just a simple exploratory development project. Do expect some 
-
+**Disclaimer**: Accuracy and quickness of results are not guaranteed as this is just a simple exploratory development project.
 ## Sample frontend
 
 Using Barrack Obama as example
@@ -49,6 +48,10 @@ python <Path to project repo>/app.py
 - Python
 - Flask
 - Langchain
+    - ChatOpenAI
+    - PromptTemplate
+    - PydanticOutputParser
+    - Harrison Chase' ReAct prompt template from Langchain Hub
 - HTML/CSS
 
 ## Acknowledgement and Credits
