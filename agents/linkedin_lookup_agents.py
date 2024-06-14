@@ -28,11 +28,7 @@ def lookup(name: str) -> str:
     )
 
     #Note: Sometimes results obtained may not be what you want due to same names adopted by different person. Sometimes results obtained may deviate from what is required which means more precise prompting is required.
-    template = """Given a person's full name {name_of_person}, I want you to get me the link to their Linkedin profile page. Your answer should contain only a URL link similar to the examples below.
-
-    Examples:
-    https://www.linkedin.com/in/leehsienloong/
-    https://www.linkedin.com/in/chan-chun-sing/
+    template = """Given a person's full name {name_of_person}, I want you to get me the link to their Linkedin profile page related to https://www.linkedin.com. Your answer should be URL link that is contains a starting string of https://www.linkedin.com/in
     """
 
     # Define prompt template with input variables
