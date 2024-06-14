@@ -12,6 +12,7 @@
                 <h1>Simple Linkedin Bio Search and Summary App</h1>
                 <input type="text" name="name" placeholder="Enter person name">
                 <button id="magic-button" type="submit" class="center">Search</button>
+                <p>Please re-enter the field again for subsequent searches or when there is no response.</p>
             </form>
         </header>
         <div id="spinner" style="text-align: center; display: none">
@@ -59,10 +60,10 @@
                     })
                     .then(data => {
                         document.getElementById("profile-pic").src = data.picture_url;
+                        document.getElementById("occupation").textContent, data.occupation;
+                        document.getElementById("country").textContent, data.country;
                         document.getElementById("summary").textContent = data.summary_and_facts.summary;
                         createHtmlList(document.getElementById("facts"), data.summary_and_facts.facts);
-                        createHtmlList(document.getElementById("occupation"), data.occupation);
-                        createHtmlList(document.getElementById("country"), data.country);
 
                         spinner.style.display = "none";
                         result.style.display = "";
