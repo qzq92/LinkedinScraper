@@ -22,7 +22,7 @@ def get_summary_and_interesting_facts(name: str)-> Tuple[Summary, str, str, str]
     linkedin_url = linkedin_lookup_agent(name=name)
     linkedin_data = scrape_linkedin_profile(linkedin_profile_url=linkedin_url)
 
-     # Template for LLM to generate short summary and two interesting facts
+    # Template for LLM to generate short summary and two interesting facts
     summary_template = """
         Given the Linkedin information {information} about a person from I want you to create:
         1. A short summary.
@@ -51,6 +51,11 @@ def get_summary_and_interesting_facts(name: str)-> Tuple[Summary, str, str, str]
         occupation = linkedin_data.get("occupation")
         country = linkedin_data.get("country")
 
+        if occupation == "":
+            occupation = "Unknown"
+        if country == "":
+            country = "Unknown"
+    # Case when invalid link is provided
     else:
         print("Unable to scrape linkedin data due to invalid link provided")
         res = None
