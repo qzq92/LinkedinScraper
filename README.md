@@ -6,6 +6,7 @@ This is a simple app developed as part of learning LLM development experience, w
 ## Sample frontend
 
 Using Barrack Obama as example
+
 ![Input page](images/frontend.png)
 
 ## API used
@@ -27,6 +28,7 @@ PYTHONPATH=<Absolute path to the directory where this project is cloned>
 # Optional if you are not using LangSmith for tracking llm utilisation related metrics
 LANGCHAIN_API_KEY=<YOUR API KEY>
 LANGCHAIN_TRACING_V2=true
+LANGCHAIN_PROJECT=<YOUR PROJECT NAME>
 ```
 
 For more information on Langsmith, refer to https://www.langchain.com/langsmith
