@@ -18,7 +18,7 @@ def get_summary_and_interesting_facts(name: str)-> Tuple[Summary, str, str, str,
     Returns:
         Tuple[Summary, str, str, str]: Includes a LLM summary of the person based on input person name of interest, the corresponding profile_pic_url for frontend display, the person's full name, country and Linkedin URL.
     """
-    # Get the linkedin lookup url with agentic call and scrape the information using nubela api
+    # Get the linkedin lookup url with agentic call supported by necessary tool and scrape the information using nubela api
     linkedin_url = linkedin_lookup_agent(name=name)
     linkedin_data = scrape_linkedin_profile(linkedin_profile_url=linkedin_url)
 
