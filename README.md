@@ -4,6 +4,9 @@ This is a simple app developed as part of learning LLM development experience, w
 
 **Disclaimer**: Accuracy and quickness of results are not guaranteed and immediate as this is just a simple exploratory development project. 
 
+## Sample frontend
+![Input page](images/frontend.png)
+
 ## API used
 
 Please note that the following API requires the use of API key to work and are not free.
