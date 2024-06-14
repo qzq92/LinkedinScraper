@@ -22,7 +22,7 @@ def process():
     if summary:
         summary_dict = summary.to_dict()
     else:
-        summary_dict = {}
+        summary_dict = {"summary":"No information", "facts": "No information"}
     
     return jsonify(
             {
